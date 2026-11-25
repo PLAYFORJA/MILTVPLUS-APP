@@ -35,18 +35,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val Background = Color(0xFF090610)
-private val Panel = Color(0xFF191126)
-private val PanelRaised = Color(0xFF241735)
-private val Violet = Color(0xFF9B5CFF)
-private val SoftText = Color(0xFFC9BDD8)
-private val Border = Color(0xFF352344)
+private val Background = Color(0xFF08070D)
+private val Panel = Color(0xFF121019)
+private val PanelRaised = Color(0xFF262033)
+private val Violet = Color(0xFF8B5CF6)
+private val Orchid = Color(0xFFB58CFF)
+private val SoftText = Color(0xFFB7B0C4)
+private val Border = Color(0xFF393344)
 
 private val navigation = listOf("Inicio", "TV en vivo", "Modo Cine", "Deportes", "Mi lista", "Buscar", "Mi cuenta", "Configuración")
 private val demoMovies = listOf(
@@ -70,6 +72,23 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+private fun BrandMark() {
+    Box(
+        modifier = Modifier
+            .width(52.dp)
+            .height(52.dp)
+            .background(
+                Brush.linearGradient(listOf(Color(0xFF6D3BEA), Color(0xFFB58CFF))),
+                RoundedCornerShape(15.dp)
+            )
+            .border(1.dp, Orchid.copy(alpha = 0.8f), RoundedCornerShape(15.dp)),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("M", color = Color.White, fontSize = 32.sp, fontWeight = FontWeight.Black, letterSpacing = (-2).sp)
+    }
+}
+
+@Composable
 private fun MiltvPlusApp() {
     var selected by remember { mutableStateOf("Inicio") }
     var selectedTitle by remember { mutableStateOf<String?>(null) }
@@ -78,9 +97,16 @@ private fun MiltvPlusApp() {
 
     Row(modifier = Modifier.fillMaxSize().background(Background).padding(22.dp)) {
         Column(modifier = Modifier.width(190.dp).fillMaxSize()) {
-            Text("▶ MILTV", color = Color.White, fontSize = 25.sp, fontWeight = FontWeight.Black)
-            Text("PLUS", color = Violet, fontSize = 24.sp, fontWeight = FontWeight.Black)
-            Text("Tu entretenimiento, tu mundo.", color = SoftText, fontSize = 10.sp)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                BrandMark()
+                Spacer(Modifier.width(11.dp))
+                Column {
+                    Text("MILTVPLUS", color = Color.White, fontSize = 19.sp, fontWeight = FontWeight.Black, letterSpacing = 1.1.sp)
+                    Text("ENTERTAINMENT", color = Orchid, fontSize = 8.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp)
+                }
+            }
+            Spacer(Modifier.height(7.dp))
+            Text("Tu pantalla. Tu mundo.", color = SoftText, fontSize = 10.sp)
             Spacer(Modifier.height(28.dp))
             navigation.forEach { item ->
                 NavigationItem(item, selected == item) {
