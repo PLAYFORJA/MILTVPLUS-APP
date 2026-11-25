@@ -16,5 +16,5 @@ data class MediaItem(
     val isLicensed: Boolean = false,
 ) {
     val canPlay: Boolean get() = isLicensed && !playbackUrl.isNullOrBlank()
-    val canShowTrailer: Boolean get() = !trailerUrl.isNullOrBlank()
+    val canShowTrailer: Boolean get() = isLicensed && !trailerUrl.isNullOrBlank()
 }
