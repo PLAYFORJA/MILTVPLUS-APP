@@ -130,7 +130,10 @@ private fun MiltvPlusApp() {
             }
         }
 
-        Column(modifier = Modifier.weight(1f).fillMaxSize().padding(start = 22.dp)) {
+        Column(
+            modifier = Modifier.weight(1f).fillMaxSize().padding(start = 22.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
                 Text("MILTVPLUS  ·  ARGENTINA", color = SoftText, fontSize = 12.sp)
                 Spacer(Modifier.width(18.dp))
