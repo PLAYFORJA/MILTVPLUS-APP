@@ -2,29 +2,37 @@
 
 **Tu entretenimiento, tu mundo.**
 
-MILTVPLUS es un proyecto de aplicación de entretenimiento para Android TV y Google TV.
+Aplicación de entretenimiento en desarrollo para Android TV y Google TV.
 
-## Estado del proyecto
+## Estado actual
 
-Primera base Android creada: pantalla de inicio en negro y violeta, navegación enfocada al control remoto y flujo de compilación automática de APK con GitHub Actions.
+- Proyecto Android Kotlin + Jetpack Compose.
+- Navegación inicial por Inicio, TV en vivo, Modo Cine, Deportes, Mi lista, Buscar, Mi cuenta y Configuración.
+- Fichas de muestra con acciones locales de Me gusta y Mi lista.
+- Modelos tipados de catálogo y contrato de repositorio.
+- Workflow de GitHub Actions para intentar compilar un APK de depuración.
+- Diseño de marca y reglas de seguridad documentadas.
+
+**Importante:** el proyecto todavía no es un servicio de streaming terminado. El catálogo visible es demostrativo; no hay señales de TV, eventos deportivos, películas ni series conectadas para reproducción. No se debe presentar la compilación como verificada hasta revisar el resultado de Actions e instalar y probar el APK.
+
+## Documentación
+
+- [Guía de marca](BRAND_GUIDE.md)
+- [Sistema visual de nueve pantallas](DESIGN_SYSTEM.md)
+- [Plan de producto y arquitectura](PRODUCT_PLAN.md)
+- [Seguridad, cuentas y derechos de contenido](SECURITY_AND_CONTENT.md)
 
 ## Tecnologías
 
-- Kotlin
-- Jetpack Compose
-- Android TV / Google TV
-- AndroidX Media3 (base para reproducción multimedia)
-- Gradle y GitHub Actions
+- Kotlin, Jetpack Compose y AndroidX Media3.
+- Android TV / Google TV.
+- Gradle y GitHub Actions.
+- API HTTPS y PostgreSQL previstos para la siguiente fase.
 
-## Compilar
+## Contenido y derechos
 
-Cada push a `main` ejecuta el flujo **Android TV APK**. También se puede iniciar manualmente desde la pestaña **Actions** de GitHub. Al finalizar, descargar el artefacto `MILTVPLUS-AndroidTV-debug`.
+MILTVPLUS solo habilitará señales, películas, series, trailers y deportes con autorización suficiente para el uso previsto y los territorios correspondientes. Que una señal sea gratuita o abierta al público no implica automáticamente permiso para retransmitirla en una aplicación de terceros.
 
-## Próximas etapas
+## Compilación
 
-1. Probar la compilación y navegación en Android TV.
-2. Integrar reproductor con streams HLS/DASH propios o licenciados.
-3. Crear catálogo, perfiles y backend.
-4. Preparar versión firmada para distribución.
-
-**Importante:** esta versión inicial no incluye canales, películas ni series reales. Solo debe conectarse contenido propio o con autorización/licencia correspondiente.
+El workflow **Android TV APK** está configurado para ejecutarse al subir cambios a `main` y manualmente desde **Actions**. Si finaliza correctamente, genera el artefacto `MILTVPLUS-AndroidTV-debug`. El resultado debe comprobarse en GitHub Actions y probarse en un Android TV real o emulador compatible.
