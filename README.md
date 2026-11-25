@@ -1,6 +1,8 @@
 # MILTVPLUS
 
-**Tu entretenimiento, tu mundo.**
+**Tu pantalla. Tu mundo.**
+
+Identidad visual v2 en desarrollo: monograma geométrico M, logotipo tipográfico propio y sistema Obsidian / Graphite / Violet.
 
 Aplicación de entretenimiento en desarrollo para Android TV y Google TV.
 
@@ -11,14 +13,14 @@ Aplicación de entretenimiento en desarrollo para Android TV y Google TV.
 - Fichas de muestra con acciones locales de Me gusta y Mi lista.
 - Modelos tipados de catálogo y contrato de repositorio.
 - Workflow de GitHub Actions para intentar compilar un APK de depuración.
-- Diseño de marca y reglas de seguridad documentadas.
+- Nueva guía de marca y sistema de diseño v2 aplicados a la identidad inicial de Android TV.
 
 **Importante:** el proyecto todavía no es un servicio de streaming terminado. El catálogo visible es demostrativo; no hay señales de TV, eventos deportivos, películas ni series conectadas para reproducción. No se debe presentar la compilación como verificada hasta revisar el resultado de Actions e instalar y probar el APK.
 
 ## Documentación
 
 - [Guía de marca](BRAND_GUIDE.md)
-- [Sistema visual de nueve pantallas](DESIGN_SYSTEM.md)
+- [Sistema visual v2 y pantallas objetivo](DESIGN_SYSTEM.md)
 - [Plan de producto y arquitectura](PRODUCT_PLAN.md)
 - [Seguridad, cuentas y derechos de contenido](SECURITY_AND_CONTENT.md)
 
