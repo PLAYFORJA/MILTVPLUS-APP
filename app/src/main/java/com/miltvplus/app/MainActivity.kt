@@ -374,8 +374,8 @@ private fun DetailScreen(title: String, liked: Boolean, saved: Boolean, onLike: 
         Text("Esta ficha muestra cómo se presentarán la sinopsis, los datos y las acciones de cada título cuando el catálogo autorizado esté conectado.", color = SoftText, fontSize = 14.sp)
         Spacer(Modifier.height(18.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            ActionButton("Reproducir") { }
-            ActionButton("Ver tráiler") { }
+            ActionButton("Reproducir", onClick = {}, enabled = false)
+            ActionButton("Ver tráiler", onClick = {}, enabled = false)
             ActionButton(if (liked) "Te gusta" else "Me gusta", onLike)
             ActionButton(if (saved) "En Mi lista" else "Guardar", onSave)
         }
@@ -434,8 +434,8 @@ private fun SettingToggle(label: String, checked: Boolean, onChange: (Boolean) -
 }
 
 @Composable
-private fun ActionButton(label: String, onClick: () -> Unit) {
-    Button(onClick = onClick, colors = ButtonDefaults.buttonColors(containerColor = Violet, contentColor = Color.White)) {
+private fun ActionButton(label: String, onClick: () -> Unit, enabled: Boolean = true) {
+    Button(onClick = onClick, enabled = enabled, colors = ButtonDefaults.buttonColors(containerColor = Violet, contentColor = Color.White)) {
         Text(label, fontSize = 12.sp)
     }
 }
