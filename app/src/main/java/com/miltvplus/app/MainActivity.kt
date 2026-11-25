@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -115,6 +116,7 @@ private fun NavItem(label: String, active: Boolean, onClick: () -> Unit) {
         modifier = Modifier.padding(horizontal = 9.dp, vertical = 10.dp)
             .background(if (active || focused) Violet.copy(alpha = 0.28f) else Color.Transparent, RoundedCornerShape(8.dp))
             .onFocusChanged { focused = it.isFocused }
+            .clickable { onClick() }
             .focusable()
             .padding(horizontal = 7.dp, vertical = 5.dp)
     )
