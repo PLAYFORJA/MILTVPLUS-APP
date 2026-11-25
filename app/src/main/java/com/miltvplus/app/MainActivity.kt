@@ -1,6 +1,7 @@
 package com.miltvplus.app
 
 import android.os.Bundle
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -35,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -90,9 +92,17 @@ private fun BrandMark() {
 
 @Composable
 private fun MiltvPlusApp() {
+    val context = LocalContext.current
+    val preferences = remember(context) {
+        context.getSharedPreferences("miltvplus_preferences", Context.MODE_PRIVATE)
+    }
     var selected by remember { mutableStateOf("Inicio") }
     var selectedTitle by remember { mutableStateOf<String?>(null) }
-    val watchlist = remember { mutableStateListOf<String>() }
+    val watchlist = remember {
+        mutableStateListOf<String>().apply {
+            addAll(preferences.getStringSet("watchlist", emptySet()) ?: emptySet())
+        }
+    }
     val liked = remember { mutableStateListOf<String>() }
 
     Row(modifier = Modifier.fillMaxSize().background(Background).padding(22.dp)) {
@@ -131,7 +141,10 @@ private fun MiltvPlusApp() {
                     liked = liked.contains(openedTitle),
                     saved = watchlist.contains(openedTitle),
                     onLike = { if (liked.contains(openedTitle)) liked.remove(openedTitle) else liked.add(openedTitle) },
-                    onSave = { if (watchlist.contains(openedTitle)) watchlist.remove(openedTitle) else watchlist.add(openedTitle) },
+                    onSave = {
+                        if (watchlist.contains(openedTitle)) watchlist.remove(openedTitle) else watchlist.add(openedTitle)
+                        preferences.edit().putStringSet("watchlist", watchlist.toSet()).apply()
+                    },
                     onBack = { selectedTitle = null }
                 )
             } else {
@@ -143,7 +156,7 @@ private fun MiltvPlusApp() {
                     "Mi lista" -> WatchlistScreen(watchlist, onOpen = { selectedTitle = it })
                     "Buscar" -> SearchScreen(onOpen = { selectedTitle = it })
                     "Mi cuenta" -> AccountScreen()
-                    "Configuración" -> SettingsScreen()
+                    "Configuración" -> SettingsScreen(preferences)
                 }
             }
         }
@@ -314,18 +327,27 @@ private fun AccountScreen() {
 }
 
 @Composable
-private fun SettingsScreen() {
-    var autoplay by remember { mutableStateOf(false) }
-    var notifications by remember { mutableStateOf(true) }
-    var subtitles by remember { mutableStateOf(true) }
+private fun SettingsScreen(preferences: android.content.SharedPreferences) {
+    var autoplay by remember { mutableStateOf(preferences.getBoolean("autoplay", false)) }
+    var notifications by remember { mutableStateOf(preferences.getBoolean("notifications", true)) }
+    var subtitles by remember { mutableStateOf(preferences.getBoolean("subtitles", true)) }
     Column {
         SectionTitle("Configuración", "Personalizá la experiencia de reproducción y la aplicación.")
         Spacer(Modifier.height(12.dp))
         SettingRow("Idioma", "Español")
         SettingRow("Calidad de video", "Automática")
-        SettingToggle("Reproducción automática", autoplay) { autoplay = it }
-        SettingToggle("Notificaciones", notifications) { notifications = it }
-        SettingToggle("Subtítulos cuando estén disponibles", subtitles) { subtitles = it }
+        SettingToggle("Reproducción automática", autoplay) {
+            autoplay = it
+            preferences.edit().putBoolean("autoplay", it).apply()
+        }
+        SettingToggle("Notificaciones", notifications) {
+            notifications = it
+            preferences.edit().putBoolean("notifications", it).apply()
+        }
+        SettingToggle("Subtítulos cuando estén disponibles", subtitles) {
+            subtitles = it
+            preferences.edit().putBoolean("subtitles", it).apply()
+        }
         Spacer(Modifier.height(10.dp))
         Text("Los ajustes de esta versión son locales y de demostración.", color = SoftText, fontSize = 11.sp)
     }
