@@ -109,7 +109,7 @@ private fun MiltvPlusApp() {
                 )
             } else {
                 when (selected) {
-                    "Inicio" -> HomeScreen(onOpen = { selectedTitle = it }, watchlistCount = watchlist.size)
+                    "Inicio" -> HomeScreen(onOpen = { selectedTitle = it }, onSection = { selected = it }, watchlistCount = watchlist.size)
                     "TV en vivo" -> LiveScreen()
                     "Modo Cine" -> CinemaScreen(onOpen = { selectedTitle = it })
                     "Deportes" -> SportsScreen()
@@ -150,7 +150,7 @@ private fun SectionTitle(title: String, subtitle: String? = null) {
 }
 
 @Composable
-private fun HomeScreen(onOpen: (String) -> Unit, watchlistCount: Int) {
+private fun HomeScreen(onOpen: (String) -> Unit, onSection: (String) -> Unit, watchlistCount: Int) {
     Column {
         Box(
             modifier = Modifier.fillMaxWidth().height(230.dp)
@@ -172,7 +172,7 @@ private fun HomeScreen(onOpen: (String) -> Unit, watchlistCount: Int) {
         SectionTitle("Explorá MILTVPLUS", "Elegí una sección para empezar.")
         Spacer(Modifier.height(12.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            listOf("TV en vivo", "Modo Cine", "Deportes", "Mi lista").forEach { Tile(it) {} }
+            listOf("TV en vivo", "Modo Cine", "Deportes", "Mi lista").forEach { item -> Tile(item) { onSection(item) } }
         }
         Spacer(Modifier.height(18.dp))
         Text("Tu lista: $watchlistCount títulos guardados", color = SoftText, fontSize = 13.sp)
