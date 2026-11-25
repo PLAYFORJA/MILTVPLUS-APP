@@ -1,45 +1,75 @@
-# MILTVPLUS — Diseño de producto (borrador para aprobación)
+# MILTVPLUS — Sistema de diseño v2
 
-## Regla principal
+**Estado:** nueva dirección visual en desarrollo. Reemplaza el borrador anterior; no se considera diseño final hasta revisión en Android TV real.
 
-Las nueve pantallas deben sentirse como una sola aplicación. No se permite cambiar la marca, la paleta, la tipografía, el tamaño de navegación ni el lenguaje de tarjetas entre secciones. Esta especificación es un borrador visual y queda pendiente de aprobación del titular antes de considerarse definitiva.
+## Principios
+1. Producto primero: cada pantalla resuelve una tarea concreta.
+2. Identidad reconocible: isotipo M geométrico y logotipo consistente, sin símbolo de play genérico.
+3. Cine sin ruido: arte protagonista, metadatos claros y espacio negativo.
+4. TV de verdad: todo se opera con D-pad, foco visible y textos legibles a distancia.
+5. Honestidad funcional: diferenciar datos reales, demostraciones, contenido no disponible y contenido reproducible.
 
-## Dirección visual
+## Tokens
+- Fondo Obsidian: #08070D
+- Superficie Graphite: #121019
+- Panel Plum: #1B1726
+- Elevado: #262033
+- Acción Violet: #8B5CF6
+- Acento Orchid: #B58CFF
+- Texto: #F7F5FA
+- Secundario: #B7B0C4
+- Borde: #393344
+- Éxito: #55C99A
+- Advertencia: #F2B766
 
-- Formato objetivo: televisión 16:9, lectura a distancia.
-- Fondo: Midnight `#090610`.
-- Panel: Aubergine `#191126`.
-- Panel elevado: `#241735`.
-- Violeta de acción: `#9B5CFF`.
-- Texto primario: `#FFFFFF`.
-- Texto secundario: `#C9BDD8`.
-- Borde: `#352344`.
-- Navegación lateral persistente, foco visible y alto contraste.
-- Tarjetas cinematográficas con proporción consistente y radios suaves.
-- El foco del control remoto debe distinguirse del elemento seleccionado.
+## Marca
+- Isotipo: M geométrica continua, angular y ascendente.
+- Logotipo horizontal: MILTVPLUS en mayúsculas, peso 800, tracking moderado.
+- No usar triángulo de play como identidad principal.
+- No usar glow, cromados o 3D como recurso permanente.
+- Crear versiones launcher, horizontal, monocroma y pequeña.
 
-## Las nueve pantallas de referencia
+## Layout para TV
+- Lienzo 16:9.
+- Navegación lateral consistente en todas las secciones.
+- Área principal amplia, con encabezado y contenido alineados.
+- Hero solo cuando exista contenido editorial real y autorizado.
+- Filas de tarjetas con proporción estable y foco D-pad destacado.
+- No llenar la pantalla con paneles pequeños ni textos largos.
 
-1. **Inicio:** hero principal, continuar viendo cuando exista historial real, tendencias y accesos.
-2. **TV en vivo:** señales oficiales habilitadas, categorías, estado en vivo y guía cuando exista EPG autorizado.
-3. **Modo Cine:** selector Películas/Series, géneros, estrenos y catálogo completo según derechos disponibles.
-4. **Deportes:** disciplinas y canales deportivos autorizados organizados por categoría.
-5. **Ficha de contenido:** portada, sinopsis, año, duración, clasificación, reparto y acciones disponibles.
-6. **Reproductor:** controles, progreso, calidad, audio, subtítulos y errores recuperables.
-7. **Mi lista:** favoritos guardados por el usuario.
-8. **Mi cuenta:** registro e inicio de sesión propios de MILTVPLUS, recuperación y gestión de perfil.
-9. **Configuración:** idioma, reproducción, subtítulos, privacidad, notificaciones y opciones de cuenta.
+## Componentes y estados
+- Botón primario: violeta sólido.
+- Botón secundario: superficie elevada con borde.
+- Tarjeta de contenido: arte 2:3, título, año/género si existen.
+- Tarjeta de categoría: icono propio + nombre; foco con borde y leve elevación.
+- Estado vacío: explicar por qué está vacío y ofrecer un siguiente paso.
+- Estado de carga: skeleton sin saltos de layout.
+- Error: mensaje comprensible y acción de reintento cuando aplique.
+- Foco, selección y deshabilitado deben ser visualmente distintos.
 
-## Comportamiento obligatorio
+## Pantallas objetivo
+1. Inicio: hero editorial, continuar viendo si hay historial, colecciones y accesos.
+2. TV en vivo: señales verificadas, categorías y guía solo con datos autorizados.
+3. Cine y series: catálogo con filtros, géneros y colecciones.
+4. Deportes: disciplinas y eventos/canales con derechos confirmados.
+5. Ficha: arte, sinopsis, metadatos, reparto y acciones disponibles.
+6. Reproductor: transporte, audio, subtítulos, calidad, errores recuperables.
+7. Mi lista: guardados sincronizables con cuenta cuando exista backend.
+8. Mi cuenta: registro propio, acceso, recuperación y perfiles.
+9. Ajustes: preferencias de reproducción, idioma, subtítulos, privacidad y cuenta.
+10. Buscar: búsqueda global con teclado de TV, filtros y estados sin resultados.
 
-- La navegación funciona con D-pad y control remoto, no solo con mouse.
-- Todo elemento enfocable tiene estado visual claro.
-- Las acciones de reproducción/tráiler se habilitan solo con URLs válidas y autorizadas.
-- Me gusta, compartir y Mi lista deben tener comportamiento real; no botones decorativos.
-- Las preferencias y listas persisten de forma segura.
-- Cuenta propia: no exigir cuenta Google. La autenticación se implementará en backend seguro.
-- Las pantallas de muestra se etiquetan como demostración hasta que haya catálogo real.
+## Requisitos de calidad
+- Navegación completa por mando, sin depender de touch.
+- Orden de foco coherente entre navegación, encabezado y contenido.
+- Acciones con resultado real; no dejar botones decorativos.
+- Preferencias persistentes y almacenamiento seguro.
+- Ninguna señal, película, serie, tráiler o evento se habilita sin derechos y URL autorizada.
+- Mockups conceptuales no son prueba de implementación ni de funcionamiento.
 
-## Uso de imágenes
-
-Las imágenes conceptuales son referencias generadas para discutir la dirección visual. No son capturas de una app ya terminada y no autorizan el uso de pósteres, marcas de canales, películas o eventos. En producción se usarán recursos propios, licenciados o con permiso expreso.
+## Plan de refinamiento
+- Fase A: marca, tokens y componentes base.
+- Fase B: rediseño de Inicio y navegación.
+- Fase C: catálogo, detalle, lista y búsqueda.
+- Fase D: TV, deportes y reproductor.
+- Fase E: cuenta/backend, persistencia, accesibilidad y QA de TV.
