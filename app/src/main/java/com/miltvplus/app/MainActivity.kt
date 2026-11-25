@@ -103,7 +103,11 @@ private fun MiltvPlusApp() {
             addAll(preferences.getStringSet("watchlist", emptySet()) ?: emptySet())
         }
     }
-    val liked = remember { mutableStateListOf<String>() }
+    val liked = remember {
+        mutableStateListOf<String>().apply {
+            addAll(preferences.getStringSet("liked_titles", emptySet()) ?: emptySet())
+        }
+    }
 
     Row(modifier = Modifier.fillMaxSize().background(Background).padding(22.dp)) {
         Column(modifier = Modifier.width(190.dp).fillMaxSize()) {
@@ -140,7 +144,10 @@ private fun MiltvPlusApp() {
                     title = openedTitle,
                     liked = liked.contains(openedTitle),
                     saved = watchlist.contains(openedTitle),
-                    onLike = { if (liked.contains(openedTitle)) liked.remove(openedTitle) else liked.add(openedTitle) },
+                    onLike = {
+                        if (liked.contains(openedTitle)) liked.remove(openedTitle) else liked.add(openedTitle)
+                        preferences.edit().putStringSet("liked_titles", liked.toSet()).apply()
+                    },
                     onSave = {
                         if (watchlist.contains(openedTitle)) watchlist.remove(openedTitle) else watchlist.add(openedTitle)
                         preferences.edit().putStringSet("watchlist", watchlist.toSet()).apply()
