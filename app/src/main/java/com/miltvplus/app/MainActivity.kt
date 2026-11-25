@@ -98,13 +98,14 @@ private fun MiltvPlusApp() {
                 Text("Cuenta MILTVPLUS", color = Color.White, fontSize = 12.sp)
             }
             Spacer(Modifier.height(18.dp))
-            if (selectedTitle != null) {
+            val openedTitle = selectedTitle
+            if (openedTitle != null) {
                 DetailScreen(
-                    title = selectedTitle!!,
-                    liked = liked.contains(selectedTitle),
-                    saved = watchlist.contains(selectedTitle),
-                    onLike = { if (liked.contains(selectedTitle)) liked.remove(selectedTitle) else liked.add(selectedTitle!!) },
-                    onSave = { if (watchlist.contains(selectedTitle)) watchlist.remove(selectedTitle) else watchlist.add(selectedTitle!!) },
+                    title = openedTitle,
+                    liked = liked.contains(openedTitle),
+                    saved = watchlist.contains(openedTitle),
+                    onLike = { if (liked.contains(openedTitle)) liked.remove(openedTitle) else liked.add(openedTitle) },
+                    onSave = { if (watchlist.contains(openedTitle)) watchlist.remove(openedTitle) else watchlist.add(openedTitle) },
                     onBack = { selectedTitle = null }
                 )
             } else {
