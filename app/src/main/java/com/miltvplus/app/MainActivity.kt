@@ -378,8 +378,8 @@ private fun DetailScreen(title: String, liked: Boolean, saved: Boolean, onLike: 
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             ActionButton("Reproducir", onClick = {}, enabled = false)
             ActionButton("Ver tráiler", onClick = {}, enabled = false)
-            ActionButton(if (liked) "Te gusta" else "Me gusta", onLike)
-            ActionButton(if (saved) "En Mi lista" else "Guardar", onSave)
+            ActionButton(if (liked) "Te gusta" else "Me gusta", onClick = onLike)
+            ActionButton(if (saved) "En Mi lista" else "Guardar", onClick = onSave)
         }
         Spacer(Modifier.height(12.dp))
         Text("Reproducción y tráiler deshabilitados hasta conectar fuentes autorizadas.", color = SoftText, fontSize = 11.sp)
@@ -436,7 +436,7 @@ private fun SettingToggle(label: String, checked: Boolean, onChange: (Boolean) -
 }
 
 @Composable
-private fun ActionButton(label: String, onClick: () -> Unit, enabled: Boolean = true) {
+private fun ActionButton(label: String, enabled: Boolean = true, onClick: () -> Unit) {
     Button(onClick = onClick, enabled = enabled, colors = ButtonDefaults.buttonColors(containerColor = Violet, contentColor = Color.White)) {
         Text(label, fontSize = 12.sp)
     }
